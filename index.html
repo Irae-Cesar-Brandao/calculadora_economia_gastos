@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculadora Financeira Pessoal</title>
 
-<!-- ESTILIZAÇÃO CSS -->
   <style>
     body {
       background: url('economia.jpg') no-repeat center center fixed;
@@ -85,8 +84,6 @@
       margin: 6px 0;
     }
   </style>
-
-<!--  CORPO DO SITE --> 
 </head>
 
 <body>
@@ -107,72 +104,52 @@
       <input type="number" id="valorDiario" placeholder="Ex: 10.00" step="0.01">
     </div>
 
-<!-- BOTÃO DE CALCULAR --> 
+    <div class="form-group">
+      <label>Dias úteis por mês:</label>
+      <input type="number" id="diasUteis" placeholder="Ex: 22" step="1" min="1">
+    </div>
+
     <button onclick="calcular()">Calcular</button>
- 
+
     <div id="resultado">
-      <p> <b>RESULTADOS </b></p>
-<hr>
-      <p><strong>Após 30 dias:</strong> R$ <span id="mes1">0.00</span></p>
+      <p><strong>Após 1 mês:</strong> R$ <span id="mes1">0.00</span></p>
       <p><strong>Após 6 meses:</strong> R$ <span id="mes6">0.00</span></p>
       <p><strong>Após 12 meses (1 ano):</strong> R$ <span id="ano1">0.00</span></p>
       <p><strong>Após 24 meses (2 anos):</strong> R$ <span id="ano2">0.00</span></p>
       <p><strong>Após 5 anos:</strong> R$ <span id="ano5">0.00</span></p>
       <p><strong>Após 10 anos:</strong> R$ <span id="ano10">0.00</span></p>
     </div>
+  </div>
 
-<br> 
-</div>
-
-<!-- SCRIPT JS - CALCULOS E FUNÇÕES  -->
   <script>
     function calcular() {
       const valorDiario = parseFloat(document.getElementById('valorDiario').value) || 0;
       const tipo = document.getElementById('tipo').value;
+      const diasUteis = parseInt(document.getElementById('diasUteis').value) || 22;
 
+      // Cálculo baseado em dias úteis informados
       const dias = {
-        mes1: 30,
-        mes6: 30 * 6,
-        ano1: 365,
-        ano2: 365 * 2,
-        ano5: 365 * 5,
-        ano10: 365 * 10
+        mes1: diasUteis,
+        mes6: diasUteis * 6,
+        ano1: diasUteis * 12,
+        ano2: diasUteis * 24,
+        ano5: diasUteis * 12 * 5 / 12 * 12, // ajusta proporcionalmente
+        ano10: diasUteis * 12 * 10 / 12 * 12
       };
 
-      // Calcula o total multiplicando o valor diário pelos dias correspondentes
       for (const periodo in dias) {
         const total = valorDiario * dias[periodo];
         const elemento = document.getElementById(periodo);
 
-        // Ajusta o texto conforme o tipo selecionado
         if (tipo === 'economia') {
           elemento.innerText = total.toFixed(2);
           elemento.style.color = '#90ee90'; // verde claro
         } else {
           elemento.innerText = `-${total.toFixed(2)}`;
           elemento.style.color = '#ff4d4d'; // vermelho
-
         }
       }
     }
-</script>
+  </script>
 </body>
 </html>
-
-
-<!-- ORIENTAÇÕES SOBRE A CALCULADORA FINANCEIRA
-Ela permite inserir o valor economizado ou gasto por dia, e mostra automaticamente quanto isso representa em:
-30 dias (1 mês)
-6 meses
-12 meses (1 ano)
-24 meses (2 anos)
-5 anos
-10 anos
-
-COMO FUNCIONA:
-Você insere o valor diário e escolhe se é Economia ou Gasto.
-Ao clicar em Calcular, o sistema mostra o total acumulado (ou perdido) para vários períodos.
-O resultado aparece colorido:
-- Verde para economias
-- Vermelho para gastos 
--->
