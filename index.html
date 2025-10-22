@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora Financeira Pessoal</title>
+
+<!-- ESTILIZAÇÃO CSS -->
+  <style>
+    body {
+      background: url('economia.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.75);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      width: 370px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    h3 {
+      font-size: 14px;
+      margin-bottom: 20px;
+      color: #ffd166;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #ffb703;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ffd166;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      text-align: left;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    #resultado p {
+      margin: 6px 0;
+    }
+  </style>
+
+<!--  CORPO DO SITE --> 
+</head>
+
+<body>
+  <div class="container">
+    <h1><span>&#128181;</span> Calculadora Financeira Pessoal</h1>
+    <h3>By: Iraê César Brandão</h3>
+
+    <div class="form-group">
+      <label>Tipo:</label>
+      <select id="tipo">
+        <option value="economia">Economia</option>
+        <option value="gasto">Gasto</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Valor diário (R$):</label>
+      <input type="number" id="valorDiario" placeholder="Ex: 10.00" step="0.01">
+    </div>
+
+<!-- BOTÃO DE CALCULAR --> 
+    <button onclick="calcular()">Calcular</button>
+ 
+    <div id="resultado">
+      <p> <b>RESULTADOS </b></p>
+<hr>
+      <p><strong>Após 30 dias:</strong> R$ <span id="mes1">0.00</span></p>
+      <p><strong>Após 6 meses:</strong> R$ <span id="mes6">0.00</span></p>
+      <p><strong>Após 12 meses (1 ano):</strong> R$ <span id="ano1">0.00</span></p>
+      <p><strong>Após 24 meses (2 anos):</strong> R$ <span id="ano2">0.00</span></p>
+      <p><strong>Após 5 anos:</strong> R$ <span id="ano5">0.00</span></p>
+      <p><strong>Após 10 anos:</strong> R$ <span id="ano10">0.00</span></p>
+    </div>
+
+<br> 
+</div>
+
+<!-- SCRIPT JS - CALCULOS E FUNÇÕES  -->
+  <script>
+    function calcular() {
+      const valorDiario = parseFloat(document.getElementById('valorDiario').value) || 0;
+      const tipo = document.getElementById('tipo').value;
+
+      const dias = {
+        mes1: 30,
+        mes6: 30 * 6,
+        ano1: 365,
+        ano2: 365 * 2,
+        ano5: 365 * 5,
+        ano10: 365 * 10
+      };
+
+      // Calcula o total multiplicando o valor diário pelos dias correspondentes
+      for (const periodo in dias) {
+        const total = valorDiario * dias[periodo];
+        const elemento = document.getElementById(periodo);
+
+        // Ajusta o texto conforme o tipo selecionado
+        if (tipo === 'economia') {
+          elemento.innerText = total.toFixed(2);
+          elemento.style.color = '#90ee90'; // verde claro
+        } else {
+          elemento.innerText = `-${total.toFixed(2)}`;
+          elemento.style.color = '#ff4d4d'; // vermelho
+
+        }
+      }
+    }
+</script>
+</body>
+</html>
+
+
+<!-- ORIENTAÇÕES SOBRE A CALCULADORA FINANCEIRA
+Ela permite inserir o valor economizado ou gasto por dia, e mostra automaticamente quanto isso representa em:
+30 dias (1 mês)
+6 meses
+12 meses (1 ano)
+24 meses (2 anos)
+5 anos
+10 anos
+
+COMO FUNCIONA:
+Você insere o valor diário e escolhe se é Economia ou Gasto.
+Ao clicar em Calcular, o sistema mostra o total acumulado (ou perdido) para vários períodos.
+O resultado aparece colorido:
+- Verde para economias
+- Vermelho para gastos 
+-->
