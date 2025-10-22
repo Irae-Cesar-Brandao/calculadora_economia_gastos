@@ -2,7 +2,7 @@
 Calculadora para calcular economias ou gastos diários 
 <br>
 Teste experimental de uma calculadora financeira com uso de linguagens htm/css/js
-<!-- ORIENTAÇÕES SOBRE A CALCULADORA FINANCEIRA
+ORIENTAÇÕES SOBRE A CALCULADORA FINANCEIRA
 Ela permite inserir o valor economizado ou gasto por dia, e mostra automaticamente quanto isso representa em:
 30 dias (1 mês)
 6 meses
@@ -17,4 +17,4 @@ Ao clicar em Calcular, o sistema mostra o total acumulado (ou perdido) para vár
 O resultado aparece colorido:
 - Verde para economias
 - Vermelho para gastos 
--->
+
